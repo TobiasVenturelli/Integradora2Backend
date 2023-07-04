@@ -36,7 +36,7 @@ mongoose.connect(MONGO_URI, {
     dbName: MONGO_DB_NAME
 }, (error) => {
     if(error){
-        console.log("DB No conected...")
+        console.log("BD no conectada...")
         return
     }
     const httpServer = app.listen(8080, () => console.log("Listening..."))

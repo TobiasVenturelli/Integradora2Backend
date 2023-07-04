@@ -34,7 +34,7 @@ router.delete("/:pid", async (req, res) => {
     req.io.emit('updatedProducts', await productModel.find().lean().exec());
     res.json({
         status: "Success",
-        massage: "Product Deleted!",
+        massage: "Producto agregado!",
         productDeleted
     })
 })

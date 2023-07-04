@@ -22,7 +22,7 @@ const run = (socketServer, app) => {
 
 
     socketServer.on("connection", socket => {
-        console.log("New client connected")
+        console.log("Nuevo cliente connectado")
         socket.on("message", async data => {
         await messagesModel.create(data)
         let messages = await messagesModel.find().lean().exec()

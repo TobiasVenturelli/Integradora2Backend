@@ -27,11 +27,11 @@ router.delete("/:cid/product/:pid", async (req, res) => {
     const productID = req.params.pid
 
     const cart = await cartModel.findById(cartID)
-    if(!cart) return res.status(404).json({status: "error", error: "Cart Not Found"})
+    if(!cart) return res.status(404).json({status: "error", error: "Carrito no funciona"})
 
     const productIDX = cart.products.findIndex(p => p.id == productID)
     
-    if (productIDX <= 0) return res.status(404).json({status: "error", error: "Product Not Found on Cart"})
+    if (productIDX <= 0) return res.status(404).json({status: "error", error: "No hay productos en el carrito"})
 
     cart.products = cart.products.splice(productIDX, 1)
     await cart.save()
