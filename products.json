@@ -1,0 +1,92 @@
+[
+    {
+        "title": "Leche",
+        "description": "Lacteos",
+        "price": 200,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 21,
+        "code": 7036
+    },
+    {
+        "title": "Mani",
+        "description": "Comida",
+        "price": 100,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 22,
+        "code": 7582
+    },
+    {
+        "title": "Mantecol",
+        "description": "Comida",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 23,
+        "code": 3455
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 24,
+        "code": 1657
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 25,
+        "code": 1657
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 26,
+        "code": 1657
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 27,
+        "code": 1657
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 28,
+        "code": 1657
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 29,
+        "code": 1657
+    },
+    {
+        "title": "Queso",
+        "description": "Lacteos",
+        "price": 300,
+        "thumbnail": "foto",
+        "stock": 50,
+        "id": 30,
+        "code": 1657
+    }
+]
