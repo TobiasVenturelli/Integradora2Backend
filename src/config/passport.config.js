@@ -1,4 +1,5 @@
 import passport from "passport";
+import cookieParser from "cookie-parser";
 import local from "passport-local"
 import passport_jwt from 'passport-jwt'
 import UserModel from "../dao/models/user.model.js";
@@ -9,6 +10,27 @@ const JWTStrategy = passport_jwt.Strategy
 const ExtractJWT = passport_jwt.ExtractJwt
 
 const initializePassport = () => {
+
+    passport.use(cookieParser());
+
+    passport.use('current', new JWTStrategy({
+        jwtFromRequest: ExtractJWT.fromExtractors([extractCookie]),
+        secretOrKey: JWT_PRIVATE_KEY
+      }, async (jwt_payload, done) => {
+        try {
+          const user = await UserModel.findById(jwt_payload.sub);
+      
+          if (user) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
+        } catch (error) {
+          return done(error, false);
+        }
+      }));
+
+    
 
     passport.use('register', new LocalStrategy({
         passReqToCallback: true,
