@@ -6,6 +6,9 @@ import session from "express-session";
 import passport from "passport";
 import cookieParser from "cookie-parser"
 import initializePassport from "./config/passport.config.js";
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 import __dirname from "./utils.js"
 import run from "./run.js";
