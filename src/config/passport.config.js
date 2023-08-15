@@ -2,7 +2,7 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import local from "passport-local"
 import passport_jwt from 'passport-jwt'
-import UserModel from "../dao/models/user.model.js";
+import UserModel from "../models/user.model.js";
 import { createHash, isValidPassword, generateToken, extractCookie, JWT_PRIVATE_KEY } from '../utils.js'
 
 const LocalStrategy = local.Strategy
