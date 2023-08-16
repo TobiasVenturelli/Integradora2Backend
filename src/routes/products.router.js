@@ -1,14 +1,13 @@
 import { Router } from "express";
 import ProductsController from "../controllers/productsController.js";
+import { isAdmin } from "../middleware/authMiddleware.js"; 
+import passport from "passport"
 
-const router = Router();
+const productsRouter = Router();
 const productsController = new ProductsController();
 
-router.get("/", productsController.getAllProducts);
-router.get("/view", productsController.viewProducts);
-router.get("/:id", productsController.getProductById);
-router.delete("/:pid", productsController.deleteProduct);
-router.post("/", productsController.addProduct);
-router.put("/:pid", productsController.updateProduct);
+productsRouter.post("/", passport.authenticate('current', { session: false }), isAdmin, productsController.addProduct);
+productsRouter.put("/:pid", passport.authenticate('current', { session: false }), isAdmin, productsController.updateProduct);
+productsRouter.delete("/:pid", passport.authenticate('current', { session: false }), isAdmin, productsController.deleteProduct);
 
-export default router;
+export default productsRouter;

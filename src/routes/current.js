@@ -1,10 +1,11 @@
-import express from "express";
+import { Router } from "express";
 import passport from "passport";
 import CurrentController from "../controllers/current.controller.js";
+import { isAdmin } from "../middlewares/authMiddleware.js"
 
-const router = express.Router();
+const currentRouter = Router(); 
 const currentController = new CurrentController();
 
-router.get('/current', passport.authenticate('current', { session: false }), currentController.getCurrentUser);
+currentRouter.get('/current', passport.authenticate('current', { session: false }), isAdmin, currentController.getCurrentUser);
 
-export default router;
+export default currentRouter; 
