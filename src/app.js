@@ -36,13 +36,13 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 mongoose.connect(MONGO_URI, {
-    dbName: MONGO_DB_NAME
-}, (error) => {
+    dbName: MONGO_DB_NAME 
+},  (error) =>  {
     if(error){
-        console.log("BD no conectada...")
-        return
+        console.log("Base de datos no conectada")
+        
     }
-    const httpServer = app.listen(8080, () => console.log("Listening..."))
+    const httpServer = app.listen(8080, () => console.log("Escuchando en el puerto 8080"))
     const socketServer = new Server(httpServer)
     httpServer.on("error", (e) => console.log("ERROR: " + e))
 
