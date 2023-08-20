@@ -1,12 +1,12 @@
-let config = {};
+import dotenv from 'dotenv';
+dotenv.config();
 
-config = {
-    server: process.env.PORT
+const config = {
+    server: process.env.PORT,
+    db: {
+        cs: process.env.MONGO_URI
+    },
+
 };
-
-config.db = {
-    cs: process.env.mongodb,
-}
-
 
 export default config;
