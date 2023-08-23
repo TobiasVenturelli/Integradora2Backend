@@ -1,11 +1,12 @@
 import { fakerES as faker } from "@faker-js/faker";
 
 export const generateProduct = () => ({
-     _id: faker.database.collation(),
+     id: faker.database.mongodbObjectId(),
      name: faker.commerce.productName(),
      description: faker.lorem.sentence(),
      price: faker.commerce.price(),
-     category: faker.commerce.department(),
+     stock: faker.random.numeric(1),
+     department: faker.commerce.department(),
    });
 
    export const generateMockProducts = () => {

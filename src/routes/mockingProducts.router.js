@@ -7,3 +7,5 @@ router.get('/mockingproducts', (req, res) => {
      const mockProducts = generateMockProducts();
      res.json(mockProducts);
    });
+
+   export default router;

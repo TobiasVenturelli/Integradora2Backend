@@ -87,14 +87,14 @@ class CartService {
         }
     }
 
-    // Generar el ticket con los datos de la compra
+  
     const ticket = await ticketService.generateTicket({
         purchaser: cart.user,
         products: purchasedProducts,
         amount: this.calculateTotalAmount(purchasedProducts)
     });
 
-    // Actualizar el carrito con los productos no comprados
+    
     const remainingProducts = cart.products.filter(product => !failedProducts.includes(product.id));
     cart.products = remainingProducts;
     await this.update(cartId, cart);
