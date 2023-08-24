@@ -11,6 +11,7 @@ import config from './config/config.js'
 import dotenv from 'dotenv'
 import __dirname from "./utils.js"
 import run from "./run.js";
+import { devLogger, prodLogger } from './config/logger.js';
 
 dotenv.config()
 
@@ -39,15 +40,15 @@ mongoose.connect(config.db.cs, {
     dbName: config.db.dbName
 }, (error) => {
     if (error) {
-        console.log("Error al conectar a la base de datos:", error);
+        prodLogger.error("Error al conectar a la base de datos:", error); 
     } else {
-        console.log("Conexión a la base de datos establecida correctamente!");
+        prodLogger.info("Conexión a la base de datos establecida correctamente!");
         const httpServer = app.listen(PORT, () => {
-            console.log("Servidor en funcionamiento en el puerto:", PORT);
+            prodLogger.info(`Servidor en funcionamiento en el puerto: ${PORT}`);
         });
         const socketServer = new Server(httpServer)
         httpServer.on("error", (e) => {
-            console.error("ERROR en el servidor:", e);
+            prodLogger.error("ERROR en el servidor:", e); 
         });
         run(socketServer, app)
     }

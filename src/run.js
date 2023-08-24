@@ -1,10 +1,11 @@
-import productRouter from "./routes/products.router.js"
-import cartRouter from "./routes/cart.router.js"
-import chatRouter from "./routes/chat.router.js"
+import productRouter from "./routes/products.routes.js"
+import cartRouter from "./routes/cart.routes.js"
+import chatRouter from "./routes/chat.routes.js"
 import messagesModel from "../src/models/messages.model.js";
-import productViewsRouter from './routes/products.views.router.js'
-import sessionRouter from './routes/session.router.js'
+import productViewsRouter from './routes/products.views.routes.js'
+import sessionRouter from './routes/session.routes.js'
 import { passportCall } from "./utils.js";
+import log from "./routes/loggerTest.routes.js";
 
 const run = (socketServer, app) => {
     app.use((req, res, next) => {
@@ -12,6 +13,8 @@ const run = (socketServer, app) => {
         next()
     })
 
+
+    app.use('/loggerTest', log);
     app.use("/products", passportCall('jwt'), productViewsRouter)
     app.use("/session", sessionRouter)
 
