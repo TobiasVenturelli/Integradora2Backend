@@ -43,6 +43,7 @@ mongoose.connect(config.db.cs, {
         prodLogger.error("Error al conectar a la base de datos:", error); 
     } else {
         prodLogger.info("Conexión a la base de datos establecida correctamente!");
+        
         const httpServer = app.listen(PORT, () => {
             prodLogger.info(`Servidor en funcionamiento en el puerto: ${PORT}`);
         });
