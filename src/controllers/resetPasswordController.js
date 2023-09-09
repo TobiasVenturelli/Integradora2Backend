@@ -13,19 +13,23 @@ class ResetPasswordController {
                }
                const token = jwt.sign({ usuarioId: usuario._id }, 'tu_secreto', { expiresIn: '1h' });
 
+
+
                const transporter = nodemailer.createTransport({
-                    service: 'tu_servicio_de_correo',
+                    host: "sandbox.smtp.mailtrap.io",
+                    port: 2525,
                     auth: {
-                         user: 'tu_correo',
-                         pass: 'tu_contraseña',
-                    },
+                         user: "f0a850411133ea",
+                         pass: "d7a330540bdd23"
+                    }
                });
+
 
                const mailOptions = {
                     from: 'tu_correo',
                     to: email,
                     subject: 'Recuperación de Contraseña',
-                    text: `Para restablecer tu contraseña, haz clic en el siguiente enlace: http://tu_sitio.com/reset-password/${token}`,
+                    text: `Para restablecer tu contraseña, haz clic en el siguiente enlace: http://localhost:8000/reset-password/${token}`,
                };
                await transporter.sendMail(mailOptions);
 
