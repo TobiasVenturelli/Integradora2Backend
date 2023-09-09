@@ -3,6 +3,7 @@ import { getUserByEmail } from "../services/sessionServices.js";
 import { generateToken } from "../utils.js";
 import { sendRecoverPassword } from "../utils/mail.utils.js";
 
+
 class SessionController {
   renderRegisterView(req, res) {
     res.render('sessions/register');
@@ -101,7 +102,7 @@ class SessionController {
 
     try {
       const hashedPassword = await createHash(password);
-      await userServices.updatePasswordByEmail(correo, hashedPassword);
+      await sessionser.updatePasswordByEmail(correo, hashedPassword);
 
       res.status(200).send("Contraseña modificada correctamente");
     } catch (e) {
