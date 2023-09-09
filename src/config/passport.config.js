@@ -3,7 +3,8 @@ import cookieParser from "cookie-parser";
 import local from "passport-local"
 import passport_jwt from 'passport-jwt'
 import UserModel from "../models/user.model.js";
-import { createHash, isValidPassword, generateToken, extractCookie, JWT_PRIVATE_KEY } from '../utils.js'
+import { createHash, isValidPassword, generateToken, extractCookie} from '../utils.js'
+import config from "./config.js";
 
 const LocalStrategy = local.Strategy
 const JWTStrategy = passport_jwt.Strategy
@@ -15,7 +16,7 @@ const initializePassport = () => {
 
     passport.use('current', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([extractCookie]),
-        secretOrKey: JWT_PRIVATE_KEY
+        secretOrKey: config.jwt.token
       }, async (jwt_payload, done) => {
         try {
           const user = await UserModel.findById(jwt_payload.sub);
@@ -85,7 +86,7 @@ const initializePassport = () => {
 
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([extractCookie]),
-        secretOrKey: JWT_PRIVATE_KEY
+        secretOrKey: config.jwt.token
     }, async (jwt_payload, done) => {
         done(null, jwt_payload)
     }))
