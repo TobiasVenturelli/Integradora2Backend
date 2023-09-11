@@ -16,14 +16,14 @@ class ProductsController {
 
   async viewProducts(req, res) {
     try {
-        const products = await productsService.viewProducts();
-        res.render('realTimeProducts', {
-            data: products
-        });
+      const products = await productsService.viewProducts();
+      res.render("realTimeProducts", {
+        data: products,
+      });
     } catch (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+      res.status(500).json({ error: "Internal Server Error" });
     }
-}
+  }
 
   async getProductById(req, res) {
     try {
@@ -38,14 +38,20 @@ class ProductsController {
   async deleteProduct(req, res) {
     try {
       const id = req.params.pid;
+      const user = req.user; // Usuario autenticado
+
+      const product = await productsService.getProductById(id);
+
+      if (user.role === "premium" && product.owner.toString() !== user._id.toString()) {
+        return res.status(403).json({ error: "No tienes permiso para eliminar este producto" });
+      }
+
       const productDeleted = await productsService.deleteProduct(id);
-
-      req.io.emit('updatedProducts', await productModel.find().lean().exec());
-
+      req.io.emit("updatedProducts", await productModel.find().lean().exec());
       res.json({
         status: "Success",
         message: "Producto eliminado exitosamente",
-        productDeleted
+        productDeleted,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -55,19 +61,25 @@ class ProductsController {
   async addProduct(req, res) {
     try {
       const product = req.body;
+      const user = req.user; // Usuario autenticado
 
       if (!product.title) {
         return res.status(400).json({ message: "Falta el nombre del producto" });
       }
 
+      // Establecer el propietario como el usuario autenticado si es premium
+      if (user.role === "premium") {
+        product.owner = user._id;
+      } else {
+        product.owner = "admin";
+      }
+
       const productAdded = await productsService.addProduct(product);
-
-      req.io.emit('updatedProducts', await productModel.find().lean().exec());
-
+      req.io.emit("updatedProducts", await productModel.find().lean().exec());
       res.json({
         status: "Success",
         message: "Producto agregado exitosamente",
-        productAdded
+        productAdded,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -81,12 +93,12 @@ class ProductsController {
 
       const product = await productsService.updateProduct(id, productToUpdate);
 
-      req.io.emit('updatedProducts', await productModel.find().lean().exec());
+      req.io.emit("updatedProducts", await productModel.find().lean().exec());
 
       res.json({
         status: "Success",
         message: "Producto actualizado exitosamente",
-        product
+        product,
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
