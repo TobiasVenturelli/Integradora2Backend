@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import bcrypt from 'bcrypt';
 import UserModel from '../models/user.model.js';
+import config from '../config/config.js';
 
 class ResetPasswordController {
      async enviarCorreoRecuperacion(email) {
@@ -16,11 +17,11 @@ class ResetPasswordController {
 
 
                const transporter = nodemailer.createTransport({
-                    host: "sandbox.smtp.mailtrap.io",
-                    port: 2525,
+                    host: config.mail.relay,
+                    port: config.mail.mailPort,
                     auth: {
-                         user: "f0a850411133ea",
-                         pass: "d7a330540bdd23"
+                         user: config.mail.mailUser,
+                         pass: config.mail.mailPass
                     }
                });
 

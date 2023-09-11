@@ -29,10 +29,9 @@ const logFormat = format.combine(
   })
 );
 
-// Lee el entorno de desarrollo o producción del archivo .env
+
 const environment = process.env.NODE_ENV || 'development';
 
-// Define el nivel de registro para desarrollo y producción basado en el entorno
 const devLogLevel = process.env.LOG_LEVEL_DEVELOPMENT || 'debug';
 const prodLogLevel = process.env.LOG_LEVEL_PRODUCTION || 'info';
 
@@ -50,9 +49,9 @@ const prodLogger = createLogger({
   format: logFormat,
   transports: [
     new transports.Console({ level: prodLogLevel }), 
-    new transports.File({ filename: 'errors.log', level: 'error' }), // Loggear errores en un archivo 'errors.log'
+    new transports.File({ filename: 'errors.log', level: 'error' }), 
   ],
-  level: prodLogLevel, // Solo loggear a partir de nivel info
+  level: prodLogLevel, 
 });
 
 export { devLogger, prodLogger };
