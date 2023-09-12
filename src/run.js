@@ -20,6 +20,7 @@ const run = (socketServer, app) => {
 
     app.use('/loggerTest', log);
     app.use("/products", passportCall('jwt'), productViewsRouter)
+
     
     app.use("/api/users", userRouter);
     app.use("/api/products", productRouter)

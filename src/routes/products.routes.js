@@ -10,4 +10,4 @@ productsRouter.post("/", passport.authenticate('current', { session: false }), i
 productsRouter.put("/:pid", passport.authenticate('current', { session: false }), isAdmin, productsController.updateProduct);
 productsRouter.delete("/:pid", passport.authenticate('current', { session: false }), isAdmin, productsController.deleteProduct);
 
-export default productsRouter;
+export default productsRouter;     

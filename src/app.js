@@ -13,6 +13,9 @@ import __dirname from "./utils.js"
 import run from "./run.js";
 import { devLogger, prodLogger } from './config/logger.js';
 
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUiExpress from 'swagger-ui-express';
+
 dotenv.config()
 
 const app = express()
@@ -25,6 +28,20 @@ app.use(cookieParser())
 app.engine("handlebars", handlebars.engine())
 app.set("views", __dirname + "/views")
 app.set("view engine", "handlebars")
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1',
+        info: {
+            title: 'Documentacion en swagger',
+            description: 'Descripcion!'
+        }
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`]
+};
+
+const specs = swaggerJSDoc(swaggerOptions);
+app.use('/docs', swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 app.use(session({
     secret: 'mysecret',
